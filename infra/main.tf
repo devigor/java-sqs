@@ -11,9 +11,9 @@ provider "aws" {
 }
 
 resource "aws_sqs_queue" "spring-queue" {
-  name            = var.queue_name
-  fifo_queue      = true
-  redrive_policy  = jsondecode({
+  name       = var.queue_name
+  fifo_queue = true
+  redrive_policy = jsonencode({
     deadLetterTargetArn = aws_sqs_queue.spring-queue-deadletter.arn
     maxReceiveCount     = 4
   })
